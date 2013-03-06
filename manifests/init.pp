@@ -8,7 +8,8 @@ define repository($source = $title, $target = "/Users/${id}/Projects") {
   }
 
   $directory = "${target}/${dirname}"
-  
+
+  file { "${target}": ensure => directory }
   file { "${directory}": ensure => directory }
 
   $init       = "git init"
