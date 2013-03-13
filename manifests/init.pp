@@ -9,7 +9,8 @@ define repository($source = $title, $target = "/Users/${id}/Projects") {
 
   $directory = "${target}/${dirname}"
 
-  file { "${target}": ensure => directory }
+  if !defined(File[$target]) { file { "${target}": ensure => directory } }
+
   file { "${directory}": ensure => directory }
 
   $init       = "git init"
@@ -20,7 +21,7 @@ define repository($source = $title, $target = "/Users/${id}/Projects") {
     command => "${init} && ${remote_add} && ${fetch} && ${reset}",
     creates => "${directory}/.git",
     cwd     => "${directory}",
-    path    => "/usr/local/bin",
+    path    => ["/usr/local/bin", "/usr/bin"],
     require => File["${directory}"],
   }
 }
