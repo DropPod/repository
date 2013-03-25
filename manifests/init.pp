@@ -1,10 +1,10 @@
 # A simple type for cloning a Git repository.
 # TODO: This should really be fleshed out into a proper type and provider pair.
-define repository($source = $title, $target = "/Users/${id}/Projects") {
-  if $title =~ /\// {
+define repository($name = $title, $source = $title, $target) {
+  if $name =~ /\// {
     $dirname = regsubst("${source}", ".*/([^.]*)([.]git)?", "\\1")
   } else {
-    $dirname = $title
+    $dirname = $name
   }
 
   $directory = "${target}/${dirname}"
