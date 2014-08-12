@@ -1,6 +1,3 @@
-# A do-nothing class for the autoloader...
-class repository {}
-
 # A simple type for cloning a Git repository.
 # TODO: This should really be fleshed out into a proper type and provider pair.
 define repository($name = $title, $source = $title, $target) {
